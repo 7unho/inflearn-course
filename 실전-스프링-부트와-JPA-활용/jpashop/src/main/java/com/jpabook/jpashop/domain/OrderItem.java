@@ -1,12 +1,15 @@
 package com.jpabook.jpashop.domain;
 
 import com.jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
     @Id
     @GeneratedValue @Column(name = "order_item_id")
@@ -22,6 +25,14 @@ public class OrderItem {
 
     private int orderPrice;
     private int count;
+
+    /*
+
+
+    왜 protected? -> JPA는 기본생성자를 protected까지 허용해준다.
+    protected OrderItem() {}
+    ==> @NoArgsConstructor(access = AccessLevel.PROTECTED) 로 대체 가능
+    */
 
     //== 생성 메서드 ==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
