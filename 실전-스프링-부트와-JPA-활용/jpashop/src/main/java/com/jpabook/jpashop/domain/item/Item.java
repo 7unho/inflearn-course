@@ -42,4 +42,11 @@ public abstract class Item {
 
         this.stockQuantity -= quantity;
     }
+
+    // item 변경
+    public void updateItem(String bookName, int bookPrice, int bookStockQuantity) {
+        this.name = bookName;
+        this.price = bookPrice;
+        this.stockQuantity = bookStockQuantity;
+    }
 }
