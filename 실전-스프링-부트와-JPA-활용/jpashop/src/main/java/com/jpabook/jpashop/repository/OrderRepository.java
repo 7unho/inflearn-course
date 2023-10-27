@@ -1,5 +1,6 @@
 package com.jpabook.jpashop.repository;
 
+import com.jpabook.jpashop.domain.Member;
 import com.jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
@@ -38,5 +39,9 @@ public class OrderRepository {
     // TODO: queryDSL로 동적 쿼리 생성하기
     public List<Order> findAll(OrderSearch orderSearch) {
         return null;
+    }
+
+    public List<Order> findAllByString(OrderSearch orderSearch) {
+        return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
     }
 }
