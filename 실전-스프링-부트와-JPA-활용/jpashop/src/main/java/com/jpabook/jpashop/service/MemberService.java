@@ -45,4 +45,15 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        /*
+        1. id 값으로 디비에서 검색
+        2. 디비에서 찾은 값을 영속성 컨텍스트에 올림 ( 영속 상태 )
+        3. setName을 통해 값이 바뀌면, 메서드 종료시점에 영속성 컨텍스트에서 해당 member 객체를 flush하고 transaction 커밋이 이루어짐
+         */
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
