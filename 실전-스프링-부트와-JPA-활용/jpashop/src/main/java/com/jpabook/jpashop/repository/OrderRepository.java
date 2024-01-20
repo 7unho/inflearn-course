@@ -1,9 +1,7 @@
 package com.jpabook.jpashop.repository;
 
-import com.jpabook.jpashop.domain.Member;
 import com.jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -51,5 +49,12 @@ public class OrderRepository {
                         "FROM Order o " +
                         "JOIN FETCH o.member " +
                         "JOIN FETCH o.delievery", Order.class).getResultList();
+    }
+
+    public List<OrderSimpleQueryDto> findOrderDtos() {
+        return em.createQuery(
+                "SELECT new com.jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, o.orderDate, o.status, m.name, d.address) " +
+                        "FROM Order o " +
+                        "JOIN o.member m JOIN o.delievery d", OrderSimpleQueryDto.class).getResultList();
     }
 }

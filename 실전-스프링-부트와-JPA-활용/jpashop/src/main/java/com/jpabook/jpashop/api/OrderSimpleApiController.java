@@ -5,6 +5,7 @@ import com.jpabook.jpashop.domain.Order;
 import com.jpabook.jpashop.domain.OrderStatus;
 import com.jpabook.jpashop.repository.OrderRepository;
 import com.jpabook.jpashop.repository.OrderSearch;
+import com.jpabook.jpashop.repository.OrderSimpleQueryDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -66,6 +67,17 @@ public class OrderSimpleApiController {
         List<SimpleOrderDto> result = orders.stream()
                                             .map(SimpleOrderDto::new)
                                             .collect(Collectors.toList());
+
+        return new Result(result);
+    }
+
+    /**
+     * 간단한 주문 조회 V4: DTO로 바로 조회
+     * @return
+     */
+    @GetMapping("/api/v4/simple-orders")
+    public Result orderV4() {
+        List<OrderSimpleQueryDto> result = orderRepository.findOrderDtos();
 
         return new Result(result);
     }
