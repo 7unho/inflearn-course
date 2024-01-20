@@ -3,9 +3,10 @@ package com.jpabook.jpashop.api;
 import com.jpabook.jpashop.domain.Address;
 import com.jpabook.jpashop.domain.Order;
 import com.jpabook.jpashop.domain.OrderStatus;
-import com.jpabook.jpashop.repository.OrderRepository;
-import com.jpabook.jpashop.repository.OrderSearch;
-import com.jpabook.jpashop.repository.OrderSimpleQueryDto;
+import com.jpabook.jpashop.repository.order.OrderRepository;
+import com.jpabook.jpashop.repository.order.OrderSearch;
+import com.jpabook.jpashop.repository.order.OrderSimpleQueryDto;
+import com.jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ public class OrderSimpleApiController {
      * 4. 마지막 방법으로 JPA가 제공하는 Native SQL이나 Spring JDBC Template을 사용해 SQL 직접 사용
      */
     private final OrderRepository orderRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     /**
      * 간단한 주문 조회 V1: 엔티티를 직접 노출
@@ -84,7 +86,7 @@ public class OrderSimpleApiController {
      */
     @GetMapping("/api/v4/simple-orders")
     public Result orderV4() {
-        List<OrderSimpleQueryDto> result = orderRepository.findOrderDtos();
+        List<OrderSimpleQueryDto> result = orderSimpleQueryRepository.findOrderDtos();
 
         return new Result(result);
     }

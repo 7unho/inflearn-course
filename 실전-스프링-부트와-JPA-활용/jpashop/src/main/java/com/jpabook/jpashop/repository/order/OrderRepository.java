@@ -1,4 +1,4 @@
-package com.jpabook.jpashop.repository;
+package com.jpabook.jpashop.repository.order;
 
 import com.jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
@@ -49,12 +49,5 @@ public class OrderRepository {
                         "FROM Order o " +
                         "JOIN FETCH o.member " +
                         "JOIN FETCH o.delievery", Order.class).getResultList();
-    }
-
-    public List<OrderSimpleQueryDto> findOrderDtos() {
-        return em.createQuery(
-                "SELECT new com.jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, o.orderDate, o.status, m.name, d.address) " +
-                        "FROM Order o " +
-                        "JOIN o.member m JOIN o.delievery d", OrderSimpleQueryDto.class).getResultList();
     }
 }

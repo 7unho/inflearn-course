@@ -7,7 +7,7 @@ import com.jpabook.jpashop.domain.OrderStatus;
 import com.jpabook.jpashop.domain.item.Item;
 import com.jpabook.jpashop.domain.item.Movie;
 import com.jpabook.jpashop.exception.NotEnoughStockException;
-import com.jpabook.jpashop.repository.OrderRepository;
+import com.jpabook.jpashop.repository.order.OrderRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
