@@ -25,6 +25,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class OrderSimpleApiController {
+    /**
+     * 쿼리 방식 선택 순서
+     * 1. 엔티티 -> DTO로 변환하는 방법을 우선 선택 := V2
+     * 2. 필요하다면 Fetch Join으로 성능 최적화 := V3
+     * 3. 그래도 안되면 DTO로 직접 조회하는 방법 사용 := V4
+     * 4. 마지막 방법으로 JPA가 제공하는 Native SQL이나 Spring JDBC Template을 사용해 SQL 직접 사용
+     */
     private final OrderRepository orderRepository;
 
     /**
