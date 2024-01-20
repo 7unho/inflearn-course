@@ -44,4 +44,12 @@ public class OrderRepository {
     public List<Order> findAllByString(OrderSearch orderSearch) {
         return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
     }
+
+    public List<Order> findAllWithMemberDelievery() {
+        return em.createQuery(
+                "SELECT o " +
+                        "FROM Order o " +
+                        "JOIN FETCH o.member " +
+                        "JOIN FETCH o.delievery", Order.class).getResultList();
+    }
 }
