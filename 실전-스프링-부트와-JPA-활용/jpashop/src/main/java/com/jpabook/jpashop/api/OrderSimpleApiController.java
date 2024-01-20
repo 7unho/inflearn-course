@@ -56,6 +56,20 @@ public class OrderSimpleApiController {
         return new Result(result);
     }
 
+    /**
+     * 간단한 주문 조회 V3: Fetch Join 최적화
+     * @return
+     */
+    @GetMapping("/api/v3/simple-orders")
+    public Result orderV3() {
+        List<Order> orders = orderRepository.findAllWithMemberDelievery();
+        List<SimpleOrderDto> result = orders.stream()
+                                            .map(SimpleOrderDto::new)
+                                            .collect(Collectors.toList());
+
+        return new Result(result);
+    }
+
     @Data
     static class SimpleOrderDto {
         private Long orderId;
