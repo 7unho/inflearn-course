@@ -1,6 +1,7 @@
 package com.jpabook.jpashop.repository.order;
 
 import com.jpabook.jpashop.domain.Order;
+import com.jpabook.jpashop.domain.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -49,5 +50,15 @@ public class OrderRepository {
                         "FROM Order o " +
                         "JOIN FETCH o.member " +
                         "JOIN FETCH o.delievery", Order.class).getResultList();
+    }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "SELECT distinct o " + // 조인에 따른 불필요한 order의 데이터 중복 방지
+                        "FROM Order o " +
+                        "JOIN FETCH o.member m " +
+                        "JOIN FETCH o.delievery d " +
+                        "JOIN FETCH o.orderItems oi " +
+                        "JOIN FETCH oi.item i", Order.class).getResultList();
     }
 }
