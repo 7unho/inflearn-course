@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class OrderApiController {
     @GetMapping("/api/v2/orders")
     public Result ordersV2() {
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
-        List<OrderDto> result =  orders.stream()
+        List<OrderDto> result = orders.stream()
                                        .map(OrderDto::new)
                                        .collect(Collectors.toList());
 
@@ -75,7 +76,20 @@ public class OrderApiController {
     @GetMapping("/api/v3/orders")
     public Result ordersV3() {
         List<Order> orders = orderRepository.findAllWithItem();
-        List<OrderDto> result =  orders.stream()
+        List<OrderDto> result = orders.stream()
+                                      .map(OrderDto::new)
+                                      .collect(Collectors.toList());
+
+        return new Result(result);
+    }
+
+    @GetMapping("/api/v3.1/orders")
+    public Result ordersV3_page(
+            @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
+            @RequestParam(value = "limit", defaultValue = "10", required = false) int limit
+    ) {
+        List<Order> orders = orderRepository.findAllWithMemberDelievery(offset, limit);
+        List<OrderDto> result = orders.stream()
                                        .map(OrderDto::new)
                                        .collect(Collectors.toList());
 

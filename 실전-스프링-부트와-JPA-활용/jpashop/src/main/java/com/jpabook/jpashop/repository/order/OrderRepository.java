@@ -51,6 +51,17 @@ public class OrderRepository {
                         "JOIN FETCH o.delievery", Order.class).getResultList();
     }
 
+    public List<Order> findAllWithMemberDelievery(int offset, int limit) {
+        return em.createQuery(
+                        "SELECT o " +
+                                "FROM Order o " +
+                                "JOIN FETCH o.member " +
+                                "JOIN FETCH o.delievery", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     public List<Order> findAllWithItem() {
         return em.createQuery(
                 "SELECT distinct o " + // 조인에 따른 불필요한 order의 데이터 중복 방지
