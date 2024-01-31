@@ -16,7 +16,7 @@ public class OrderRepository {
         em.persist(order);
     }
 
-    public Order findOne(Long id){
+    public Order findOne(Long id) {
         return em.find(Order.class, id);
     }
 
@@ -25,14 +25,13 @@ public class OrderRepository {
      * @param orderSearch
      * @return List[Order]
      * @SQL {
-     *     SELECT *
-     *     FROM order, member
-     *     WHERE
-     *          order.member_id = member.id
-     *     [ and  status = orderSearch.status ]
-     *     [ and  name = orderSearch.member_name ]
+     * SELECT *
+     * FROM order, member
+     * WHERE
+     * order.member_id = member.id
+     * [ and  status = orderSearch.status ]
+     * [ and  name = orderSearch.member_name ]
      * }
-     *
      */
     // TODO: queryDSL로 동적 쿼리 생성하기
     public List<Order> findAll(OrderSearch orderSearch) {

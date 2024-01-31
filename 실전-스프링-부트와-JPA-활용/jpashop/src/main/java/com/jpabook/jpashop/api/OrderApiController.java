@@ -5,6 +5,8 @@ import com.jpabook.jpashop.domain.OrderItem;
 import com.jpabook.jpashop.repository.order.OrderDto;
 import com.jpabook.jpashop.repository.order.OrderRepository;
 import com.jpabook.jpashop.repository.order.OrderSearch;
+import com.jpabook.jpashop.repository.order.query.OrderQueryDto;
+import com.jpabook.jpashop.repository.order.query.OrderQueryRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderApiController {
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     /**
      * 간단한 주문 조회 V1: 엔티티를 직접 노출
@@ -83,6 +86,15 @@ public class OrderApiController {
         return new Result(result);
     }
 
+    /**
+     * 간단한 주문 조회 V3.1: 페이징 한계 돌파
+     *
+     * @XToOne 관계의 엔티티만 Fetch Join으로 처리하자 !
+     *
+     * @param offset
+     * @param limit
+     * @return
+     */
     @GetMapping("/api/v3.1/orders")
     public Result ordersV3_page(
             @RequestParam(value = "offset", defaultValue = "0", required = false) int offset,
@@ -94,6 +106,17 @@ public class OrderApiController {
                                        .collect(Collectors.toList());
 
         return new Result(result);
+    }
+
+    /**
+     * 간단한 주문 조회 V4: JPA에서 컬렉션을 포함한 DTO 직접 조회
+     * @return
+     */
+    @GetMapping("/api/v4/orders")
+    public Result ordersV4() {
+        List<OrderQueryDto> orders = orderQueryRepository.findOrderQueryDtos();
+
+        return new Result(orders);
     }
 
     @Data
