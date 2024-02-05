@@ -18,4 +18,11 @@ public class OrderItemQueryDto {
         this.orderPrice = orderItem.getOrderPrice();
         this.count = orderItem.getCount();
     }
+
+    public OrderItemQueryDto(Long orderId, String itemName, int orderPrice, int count) {
+        this.orderId = orderId;
+        this.itemName = itemName;
+        this.orderPrice = orderPrice;
+        this.count = count;
+    }
 }
