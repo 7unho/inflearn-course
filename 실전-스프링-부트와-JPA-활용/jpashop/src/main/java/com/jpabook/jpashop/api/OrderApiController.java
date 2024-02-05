@@ -5,6 +5,7 @@ import com.jpabook.jpashop.domain.OrderItem;
 import com.jpabook.jpashop.repository.order.OrderDto;
 import com.jpabook.jpashop.repository.order.OrderRepository;
 import com.jpabook.jpashop.repository.order.OrderSearch;
+import com.jpabook.jpashop.repository.order.query.OrderFlatDto;
 import com.jpabook.jpashop.repository.order.query.OrderQueryDto;
 import com.jpabook.jpashop.repository.order.query.OrderQueryRepository;
 import lombok.AllArgsConstructor;
@@ -133,6 +134,28 @@ public class OrderApiController {
         List<OrderQueryDto> orders = orderQueryRepository.findAllByDtoVersion5();
 
         return new Result(orders);
+    }
+
+    /**
+     * 간단한 주문 조회 V6: JPA에서 컬렉션을 포함한 DTO 직접 조회 - Flat Data Optimization
+     * V5 에서 쿼리 실행 -> Root 1회, Collection 1회 총 2회 발생 !!
+     * 이를 쿼리 한 번에 해결해보자 ~!
+     *
+     * 장점 : 쿼리 한 번에 원하는 데이터를 DTO로 매핑 후 가져올 수 있다.
+     * 단점
+     * 1. 쿼리는 한번이지만, 조인 연산으로 인해 데이터의 중복이 발생될 수 있어 V5 보다 느릴 수 있다.
+     * 2. 애플리케이션 단에서 추가 작업이 발생한다. ( 가령 플랫된 데이터를 API 스펙에 맞게 가공하는 경우 )
+     * 3. 1번에서의 데이터 중복과 같은 이유로 페이징이 불가능 하다.
+     *
+     * @return
+     */
+    @GetMapping("/api/v6/orders")
+    public Result ordersV6() {
+        List<OrderFlatDto> flats = orderQueryRepository.findAllByDtoVersion6();
+
+        // TODO: flat된 데이터를 v5의 API 스펙에 맞게 가공해보자 !
+
+        return new Result(flats);
     }
 
     @Data

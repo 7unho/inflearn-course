@@ -69,4 +69,20 @@ public class OrderQueryRepository {
 
         return result;
     }
+
+    /**
+     * 문제 해결 과정
+     * 1. 쿼리로 뽑아올 데이터를 담을 DTO 생성 (OrderFlatDto)
+     * 2. 여러 테이블 조인을 통해 한번에 DTO에 매핑
+     * @return
+     */
+    public List<OrderFlatDto> findAllByDtoVersion6() {
+        return em.createQuery(
+                "SELECT new com.jpabook.jpashop.repository.order.query.OrderFlatDto(o.id, o.member.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                        "FROM Order o " +
+                        "JOIN o.member m " +
+                        "JOIN o.delievery d " +
+                        "JOIN o.orderItems oi " +
+                        "JOIN oi.item i ", OrderFlatDto.class).getResultList();
+    }
 }
