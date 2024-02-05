@@ -110,11 +110,24 @@ public class OrderApiController {
 
     /**
      * 간단한 주문 조회 V4: JPA에서 컬렉션을 포함한 DTO 직접 조회
+     * 9 번의 쿼리 발생 -> 어떻게 최적화? V5
      * @return
      */
     @GetMapping("/api/v4/orders")
     public Result ordersV4() {
         List<OrderQueryDto> orders = orderQueryRepository.findOrderQueryDtos();
+
+        return new Result(orders);
+    }
+
+    /**
+     * 간단한 주문 조회 V5: JPA에서 컬렉션을 포함한 DTO 직접 조회 - Collection 조회 최적화
+     * V4
+     * @return
+     */
+    @GetMapping("/api/v5/orders")
+    public Result ordersV5() {
+        List<OrderQueryDto> orders = orderQueryRepository.findAllByDtoVersion5();
 
         return new Result(orders);
     }
