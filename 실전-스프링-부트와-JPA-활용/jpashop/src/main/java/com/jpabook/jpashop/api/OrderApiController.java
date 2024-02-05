@@ -122,7 +122,10 @@ public class OrderApiController {
 
     /**
      * 간단한 주문 조회 V5: JPA에서 컬렉션을 포함한 DTO 직접 조회 - Collection 조회 최적화
-     * V4
+     * 쿼리 실행 -> Root 1회, Collection 1회 총 2회 발생 !!
+     * 1. @XToOne 관계를 먼저 쿼리로 불러옴 ( Root, findOrders )
+     * 2. 1에서 얻은 식별자( orderId )를 통해 @XToMany 관계의 orderItem을 한꺼번에 조회한다.
+     * 3. Map을 사용해 매칭 성능 향상 -> O(1)
      * @return
      */
     @GetMapping("/api/v5/orders")
