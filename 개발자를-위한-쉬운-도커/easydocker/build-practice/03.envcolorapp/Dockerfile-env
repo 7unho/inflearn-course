@@ -1,0 +1,19 @@
+FROM node:14
+
+WORKDIR /app
+
+# COPY ./ /
+# WORKDIR로 /app 위치로 이동하기 때문에
+# COPY의 위치도 변경해줬다.
+COPY . . 
+
+
+RUN npm install
+
+ENV COLOR=red
+
+USER node
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
