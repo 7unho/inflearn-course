@@ -3,31 +3,17 @@ FROM node:14 AS build
 
 WORKDIR /app
 
-# 라이브러리 설치에 필요한 파일만 복사
-COPY package.json .
-COPY package-lock.json .
-
-# 라이브러리 설치
-RUN npm ci
-
-# 소스코드 복사
+# 빌드 컨텍스트의 소스코드를 작업 디렉토리로 복사, 라이브러리 설치 및 빌드
 COPY . /app
-
-# 소스코드 빌드
+RUN npm ci
 RUN npm run build
 
-# 프로덕션 스테이지
-FROM nginx:1.21.4-alpine 
-COPY nginx.conf /etc/nginx/conf.d/default.conf.template
-ENV BACKEND_HOST leafy
-ENV BACKEND_PORT 8080
-
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# 런타임 이미지로 nginx 1.21.4 지정, /usr/share/nginx/html 폴더에 권한 추가
+FROM nginx:1.21.4-alpine
 
 # 빌드 이미지에서 생성된 dist 폴더를 nginx 이미지로 복사
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off;"]
