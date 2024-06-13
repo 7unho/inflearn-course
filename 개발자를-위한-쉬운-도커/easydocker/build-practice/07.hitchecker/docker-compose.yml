@@ -1,0 +1,19 @@
+version: '3'
+
+# 서비스 목록
+services:
+  # 서비스명.
+  hitchecker:
+    # 빌드할 Dockerfile 위치
+    build: ./app
+
+    # 빌드에 사용할 이미지
+    image: hitchecker:1.0.0
+
+    # Port forwading
+    ports:
+      # - "5000:5000" -> 맥의 경우 airplay가 5000번 사용하므로, 포트 충돌 일어남
+      - "8080:5000"
+
+  redis:
+    image: "redis:alpine"
