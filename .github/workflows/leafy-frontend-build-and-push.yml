@@ -6,7 +6,7 @@ on:
       - 08-cicd  
       # 08-cicd 브랜치에 push될 때 워크플로우가 실행됩니다.
     paths:
-      - './개발자를-위한-쉬운-도커/easydocker/leafy/leafy-frontend/**'
+      - '../개발자를-위한-쉬운-도커/easydocker/leafy/leafy-frontend/**'
 
 jobs:
   build-and-push:
@@ -33,9 +33,9 @@ jobs:
     - name: Build and Push
       uses: docker/build-push-action@v2
       with:
-        context: ./개발자를-위한-쉬운-도커/easydocker/leafy/leafy-frontend
+        context: ../개발자를-위한-쉬운-도커/easydocker/leafy/leafy-frontend
         # Dockerfile이 있는 위치입니다.
-        file: ./개발자를-위한-쉬운-도커/easydocker/leafy/leafy-frontend/Dockerfile
+        file: ../개발자를-위한-쉬운-도커/easydocker/leafy/leafy-frontend/Dockerfile
         # Dockerfile의 경로입니다.
         push: true  
         # 이미지를 레지스트리에 푸시합니다.
