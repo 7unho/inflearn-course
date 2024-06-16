@@ -7,6 +7,7 @@ services:
     image: leafy-backend:5.0.0-compose
     environment:
     - DB_URL=leafy-postgres
+    # depends_on에 작성된 컨테이너가 실행될 때 까지, 컨테이너 실행을 보류한다.
     depends_on:
       - leafy-postgres
   leafy-front:
