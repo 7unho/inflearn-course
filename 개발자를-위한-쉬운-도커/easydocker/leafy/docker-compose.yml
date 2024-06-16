@@ -1,0 +1,20 @@
+version: '3'
+services:
+  leafy-postgres:
+    image: devwikirepo/leafy-postgres:1.0.0
+  leafy-backend:
+    build: ./leafy-backend
+    image: leafy-backend:5.0.0-compose
+    environment:
+    - DB_URL=leafy-postgres
+    depends_on:
+      - leafy-postgres
+  leafy-front:
+    build: ./leafy-frontend
+    image: leafy-front:5.0.0-compose
+    environment:
+      - BACKEND_HOST=leafy-backend
+    ports:
+      - 80:80
+    depends_on:
+      - leafy-backend
