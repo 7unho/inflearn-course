@@ -3,9 +3,9 @@ package com.april2nd.sample;
 import java.util.Scanner;
 
 public class CalculatorRequestReader {
-    public CalculatorRequest read() {
+    public CalculationRequest read() {
         Scanner scanner = new Scanner(System.in);
         String result = scanner.nextLine();
-        return new CalculatorRequest(result.split(" "));
+        return new CalculationRequest(result.split(" "));
     }
 }
