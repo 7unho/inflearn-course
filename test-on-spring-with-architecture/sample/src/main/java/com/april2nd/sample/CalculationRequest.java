@@ -1,5 +1,7 @@
 package com.april2nd.sample;
 
+import java.util.Arrays;
+
 public class CalculationRequest {
     private final long num1;
     private final String operator;
@@ -24,7 +26,7 @@ public class CalculationRequest {
     }
 
     private boolean isInvalidOperator(String operator) {
-        return !(operator == "+" || operator == "-" || operator == "/" || operator == "*");
+        return !Arrays.asList("+", "-", "*", "/").contains(operator);
     }
 
     public long getNum1() {
