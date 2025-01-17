@@ -30,6 +30,12 @@ application.yml
 !**/src/test/**/out/
 
 
+### Java ###
+# Compiled class file
+*.class
+*.http
+*.package-lock.json
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
