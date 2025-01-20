@@ -16,6 +16,7 @@ ssafy-web.log
 .springBeans
 .sts4-cache
 bin/
+**/application-secret.properties
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
