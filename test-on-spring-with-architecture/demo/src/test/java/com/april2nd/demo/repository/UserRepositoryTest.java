@@ -73,4 +73,44 @@ class UserRepositoryTest {
         //then
         assertThat(result.isEmpty()).isTrue();
     }
+
+    @Test
+    @DisplayName("이메일과 유저상태로 유저 데이터를 찾아올 수 있다")
+    public void findByEmailAndStatus_로_유저_데이터를_찾아올_수_있다() throws Exception {
+        //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        userEntity.setEmail("rlawnsgh8395@naver.com");
+        userEntity.setAddress("SEOUL");
+        userEntity.setNickname("april2nd");
+        userEntity.setStatus(UserStatus.ACTIVE);
+        userEntity.setCertificationCode("aaaaaa-aa-aa-aa-aaaaaa");
+
+        //when
+        userRepository.save(userEntity);
+        Optional<UserEntity> result = userRepository.findByEmailAndStatus("rlawnsgh8395@naver.com", UserStatus.ACTIVE);
+
+        //then
+        assertThat(result.isPresent()).isTrue();
+    }
+
+    @Test
+    @DisplayName("이메일과 유저상태로 조회 시 데이터가 없다면 optional.empty를 내려준다")
+    public void findByEmailAndStatus_는_데이터가_없으면_Optional_empty_를_내려준다() throws Exception {
+        //given
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        userEntity.setEmail("rlawnsgh8395@naver.com");
+        userEntity.setAddress("SEOUL");
+        userEntity.setNickname("april2nd");
+        userEntity.setStatus(UserStatus.ACTIVE);
+        userEntity.setCertificationCode("aaaaaa-aa-aa-aa-aaaaaa");
+
+        //when
+        userRepository.save(userEntity);
+        Optional<UserEntity> result = userRepository.findByEmailAndStatus("rlawnsgh8395@naver.com", UserStatus.PENDING);
+
+        //then
+        assertThat(result.isEmpty()).isTrue();
+    }
 }
