@@ -26,7 +26,7 @@ class UserRepositoryTest {
         //given
 
         //when
-        Optional<UserEntity> result = userRepository.findByIdAndStatus(1, UserStatus.ACTIVE);
+        Optional<UserEntity> result = userRepository.findByIdAndStatus(100L, UserStatus.ACTIVE);
 
         //then
         assertThat(result.isPresent()).isTrue();
@@ -38,7 +38,7 @@ class UserRepositoryTest {
         //given
 
         //when
-        Optional<UserEntity> result = userRepository.findByIdAndStatus(1, UserStatus.PENDING);
+        Optional<UserEntity> result = userRepository.findByIdAndStatus(100L, UserStatus.PENDING);
 
         //then
         assertThat(result.isEmpty()).isTrue();
