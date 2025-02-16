@@ -1,11 +1,10 @@
 package com.april2nd.demo.controller;
 
-import com.april2nd.demo.model.UserStatus;
-import com.april2nd.demo.model.dto.UserUpdateDto;
-import com.april2nd.demo.repository.UserEntity;
-import com.april2nd.demo.repository.UserRepository;
+import com.april2nd.demo.user.domain.UserStatus;
+import com.april2nd.demo.user.domain.UserUpdate;
+import com.april2nd.demo.user.infrastructure.UserEntity;
+import com.april2nd.demo.user.infrastructure.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +132,7 @@ class UserControllerTest {
         String address = "UPDATED address";
         String email = "rlawnsgh8395@naver.com";
 
-        UserUpdateDto userUpdateDto = UserUpdateDto.builder()
+        UserUpdate userUpdateDto = UserUpdate.builder()
                 .nickname(nickname)
                 .address(address)
                 .build();

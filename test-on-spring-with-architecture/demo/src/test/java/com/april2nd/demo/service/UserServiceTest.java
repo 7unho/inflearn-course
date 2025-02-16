@@ -1,12 +1,12 @@
 package com.april2nd.demo.service;
 
-import com.april2nd.demo.exception.CertificationCodeNotMatchedException;
-import com.april2nd.demo.exception.ResourceNotFoundException;
-import com.april2nd.demo.model.UserStatus;
-import com.april2nd.demo.model.dto.UserCreateDto;
-import com.april2nd.demo.model.dto.UserUpdateDto;
-import com.april2nd.demo.repository.UserEntity;
-
+import com.april2nd.demo.common.domain.exception.CertificationCodeNotMatchedException;
+import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
+import com.april2nd.demo.user.domain.UserCreate;
+import com.april2nd.demo.user.domain.UserStatus;
+import com.april2nd.demo.user.domain.UserUpdate;
+import com.april2nd.demo.user.infrastructure.UserEntity;
+import com.april2nd.demo.user.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -98,7 +98,7 @@ class UserServiceTest {
     @DisplayName("userCrateDto를 이용하여 유저를 생성할 수 있다")
     public void userCrateDto_를_이용하여_유저를_생성할_수_있다() throws Exception {
         //given
-        UserCreateDto userCreateDto = UserCreateDto.builder()
+        UserCreate userCreateDto = UserCreate.builder()
                 .email("createdByPending@test.com")
                 .nickname("april2nd")
                 .address("seoul")
@@ -119,7 +119,7 @@ class UserServiceTest {
     @DisplayName("userCrateDto를 이용하여 유저 정보를 수정할 수 있다")
     public void userCrateDto_를_이용하여_유저_정보_를_수정할_수_있다() throws Exception {
         //given
-        UserUpdateDto userUpdateDto = UserUpdateDto.builder()
+        UserUpdate userUpdateDto = UserUpdate.builder()
                 .address("incheon")
                 .nickname("unknownflower")
                 .build();

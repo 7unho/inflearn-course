@@ -1,6 +1,6 @@
 package com.april2nd.demo.controller;
 
-import com.april2nd.demo.model.dto.PostCreateDto;
+import com.april2nd.demo.post.domain.PostCreate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,12 +42,12 @@ class PostCreateControllerTest {
         // given
         Long writerId = 100L;
         String content = "CREATED post";
-        PostCreateDto postCreateDto = PostCreateDto.builder()
+        PostCreate postCreate = PostCreate.builder()
                 .writerId(writerId)
                 .content(content)
                 .build();
 
-        String requestBody = objectMapper.writeValueAsString(postCreateDto);
+        String requestBody = objectMapper.writeValueAsString(postCreate);
         // when
         // then
         mockMvc.perform(

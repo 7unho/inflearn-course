@@ -1,9 +1,10 @@
 package com.april2nd.demo.service;
 
-import com.april2nd.demo.exception.ResourceNotFoundException;
-import com.april2nd.demo.model.dto.PostCreateDto;
-import com.april2nd.demo.model.dto.PostUpdateDto;
-import com.april2nd.demo.repository.PostEntity;
+import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
+import com.april2nd.demo.post.domain.PostCreate;
+import com.april2nd.demo.post.domain.PostUpdate;
+import com.april2nd.demo.post.infrastructure.PostEntity;
+import com.april2nd.demo.post.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ class PostServiceTest {
     @DisplayName("PostCrateDto로 새로운 포스트를 생성할 수 있다")
     public void PostCrateDto로_새로운_포스트를_생성할_수_있다() throws Exception {
         //given
-        PostCreateDto postCreateDto = PostCreateDto.builder()
+        PostCreate postCreateDto = PostCreate.builder()
                 .content("createdByPostCreateDto")
                 .writerId(100L)
                 .build();
@@ -77,7 +78,7 @@ class PostServiceTest {
     @DisplayName("PostUpdateDto로 포스트를 수정할 수 있다")
     public void PostUpdateDto로_포스트를_수정할_수_있다() throws Exception {
         //given
-        PostUpdateDto postUpdateDto = PostUpdateDto.builder()
+        PostUpdate postUpdateDto = PostUpdate.builder()
                 .content("UpdatedPostByPostUpdateDto")
                 .build();
         //when

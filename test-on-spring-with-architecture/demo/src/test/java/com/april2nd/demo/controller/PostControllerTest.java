@@ -1,10 +1,8 @@
 package com.april2nd.demo.controller;
 
-import com.april2nd.demo.model.dto.PostUpdateDto;
-import com.april2nd.demo.model.dto.UserResponse;
-import com.april2nd.demo.repository.PostRepository;
-import com.april2nd.demo.repository.UserEntity;
-import com.april2nd.demo.service.UserService;
+import com.april2nd.demo.post.domain.PostUpdate;
+import com.april2nd.demo.user.infrastructure.UserEntity;
+import com.april2nd.demo.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -78,7 +75,7 @@ class PostControllerTest {
         String content = "UPDATED content";
         Long postId = 100L;
 
-        PostUpdateDto postUpdateDto = PostUpdateDto.builder()
+        PostUpdate postUpdateDto = PostUpdate.builder()
                 .content(content)
                 .build();
 

@@ -2,7 +2,9 @@ package com.april2nd.demo.repository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.april2nd.demo.model.UserStatus;
+import com.april2nd.demo.user.domain.UserStatus;
+import com.april2nd.demo.user.infrastructure.UserEntity;
+import com.april2nd.demo.user.infrastructure.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

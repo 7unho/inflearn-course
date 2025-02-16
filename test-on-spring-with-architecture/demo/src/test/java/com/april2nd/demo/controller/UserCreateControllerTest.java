@@ -1,6 +1,6 @@
 package com.april2nd.demo.controller;
 
-import com.april2nd.demo.model.dto.UserCreateDto;
+import com.april2nd.demo.user.domain.UserCreate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -47,12 +45,12 @@ class UserCreateControllerTest {
         String nickname = "UnknownFlower";
         String address = "jeju";
         String email = "rlawnsgh8395@naver.com";
-        UserCreateDto userCreateDto = UserCreateDto.builder()
+        UserCreate userCreate = UserCreate.builder()
                 .nickname(nickname)
                 .address(address)
                 .email(email)
                 .build();
-        String requestBody = objectMapper.writeValueAsString(userCreateDto);
+        String requestBody = objectMapper.writeValueAsString(userCreate);
         // when
         // then
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
