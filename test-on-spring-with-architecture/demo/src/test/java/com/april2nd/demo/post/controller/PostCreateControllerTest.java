@@ -1,4 +1,4 @@
-package com.april2nd.demo.controller;
+package com.april2nd.demo.post.controller;
 
 import com.april2nd.demo.post.domain.PostCreate;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.april2nd.demo.service;
+package com.april2nd.demo.user.service;
 
 import com.april2nd.demo.common.domain.exception.CertificationCodeNotMatchedException;
 import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;

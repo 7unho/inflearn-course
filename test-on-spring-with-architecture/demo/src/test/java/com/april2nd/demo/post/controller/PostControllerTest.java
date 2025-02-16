@@ -1,4 +1,4 @@
-package com.april2nd.demo.controller;
+package com.april2nd.demo.post.controller;
 
 import com.april2nd.demo.post.domain.PostUpdate;
 import com.april2nd.demo.user.infrastructure.UserEntity;

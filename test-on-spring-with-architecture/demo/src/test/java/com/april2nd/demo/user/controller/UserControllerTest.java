@@ -1,4 +1,4 @@
-package com.april2nd.demo.controller;
+package com.april2nd.demo.user.controller;
 
 import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserUpdate;
