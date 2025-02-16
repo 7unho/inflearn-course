@@ -3,7 +3,7 @@ package com.april2nd.demo.user.controller;
 import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserUpdate;
 import com.april2nd.demo.user.infrastructure.UserEntity;
-import com.april2nd.demo.user.infrastructure.UserRepository;
+import com.april2nd.demo.user.infrastructure.UserJpaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ class UserControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userJpaRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -88,7 +88,7 @@ class UserControllerTest {
                         .queryParam("certificationCode", certificationCode))
                 .andExpect(status().isFound());
         //then
-        UserEntity userEntity = userRepository.findById(id).get();
+        UserEntity userEntity = userJpaRepository.findById(id).get();
         assertThat(userEntity.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
 

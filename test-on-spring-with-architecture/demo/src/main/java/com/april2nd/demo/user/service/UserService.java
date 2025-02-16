@@ -6,10 +6,11 @@ import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserCreate;
 import com.april2nd.demo.user.domain.UserUpdate;
 import com.april2nd.demo.user.infrastructure.UserEntity;
-import com.april2nd.demo.user.infrastructure.UserRepository;
+
 import java.time.Clock;
 import java.util.UUID;
 
+import com.april2nd.demo.user.service.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

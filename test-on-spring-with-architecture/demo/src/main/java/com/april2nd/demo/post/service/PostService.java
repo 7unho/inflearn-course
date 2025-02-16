@@ -4,7 +4,7 @@ import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
 import com.april2nd.demo.post.domain.PostCreate;
 import com.april2nd.demo.post.domain.PostUpdate;
 import com.april2nd.demo.post.infrastructure.PostEntity;
-import com.april2nd.demo.post.infrastructure.PostRepository;
+import com.april2nd.demo.post.service.port.PostRepository;
 import com.april2nd.demo.user.infrastructure.UserEntity;
 import java.time.Clock;
 
