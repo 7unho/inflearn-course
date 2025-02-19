@@ -1,7 +1,7 @@
 package com.april2nd.demo.post.controller;
 
 import com.april2nd.demo.post.domain.PostUpdate;
-import com.april2nd.demo.user.infrastructure.UserEntity;
+import com.april2nd.demo.user.domain.User;
 import com.april2nd.demo.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -41,9 +41,6 @@ class PostControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
     // TODO: 포스트 ID를 통해 특정 게시물 정보를 불러올 수 있다
@@ -52,8 +49,6 @@ class PostControllerTest {
     public void 포스트_ID를_통해_특정_게시물_정보를_불러올_수_있다() throws Exception {
         // given
         Long postId = 100L;
-        Long userId = 100L;
-        UserEntity userEntity = userService.getById(userId);
         // when
 
         // then
@@ -61,9 +56,9 @@ class PostControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.content").value("helloworld"))
-                .andExpect(jsonPath("$.writer.id").value(userEntity.getId()))
-                .andExpect(jsonPath("$.writer.email").value(userEntity.getEmail()))
-                .andExpect(jsonPath("$.writer.nickname").value(userEntity.getNickname()))
+                .andExpect(jsonPath("$.writer.id").isNumber())
+                .andExpect(jsonPath("$.writer.email").value("rlawnsgh8395@naver.com"))
+                .andExpect(jsonPath("$.writer.nickname").value("april2nd"))
                 .andExpect(jsonPath("$.writer.status").value("ACTIVE"));
     }
 

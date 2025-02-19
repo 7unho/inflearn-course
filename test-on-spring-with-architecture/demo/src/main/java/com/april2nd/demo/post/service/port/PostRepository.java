@@ -1,12 +1,12 @@
 package com.april2nd.demo.post.service.port;
 
-import com.april2nd.demo.post.infrastructure.PostEntity;
+import com.april2nd.demo.post.domain.Post;
 
 import java.util.Optional;
 
 public interface PostRepository {
 
-    PostEntity save(PostEntity postEntity);
+    Post save(Post post);
 
-    Optional<PostEntity> findById(long id);
+    Optional<Post> findById(long id);
 }

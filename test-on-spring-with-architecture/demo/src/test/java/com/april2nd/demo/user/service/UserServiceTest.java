@@ -2,11 +2,10 @@ package com.april2nd.demo.user.service;
 
 import com.april2nd.demo.common.domain.exception.CertificationCodeNotMatchedException;
 import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
+import com.april2nd.demo.user.domain.User;
 import com.april2nd.demo.user.domain.UserCreate;
 import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserUpdate;
-import com.april2nd.demo.user.infrastructure.UserEntity;
-import com.april2nd.demo.user.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -49,7 +48,7 @@ class UserServiceTest {
         String email = "rlawnsgh8395@naver.com";
 
         //when
-        UserEntity result = userService.getByEmail(email);
+        User result = userService.getByEmail(email);
 
         //then
         assertThat(result.getNickname()).isEqualTo("april2nd");
@@ -75,7 +74,7 @@ class UserServiceTest {
         Long id = 100L;
 
         //when
-        UserEntity result = userService.getById(id);
+        User result = userService.getById(id);
 
         //then
         assertThat(result.getNickname()).isEqualTo("april2nd");
@@ -106,7 +105,7 @@ class UserServiceTest {
         BDDMockito.doNothing().when(mailSender).send(any(SimpleMailMessage.class));
 
         //when
-        UserEntity result = userService.create(userCreateDto);
+        User result = userService.create(userCreateDto);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -127,7 +126,7 @@ class UserServiceTest {
         Long userId = userService.getByEmail("rlawnsgh8395@naver.com").getId();
 
         //when
-        UserEntity result = userService.update(userId, userUpdateDto);
+        User result = userService.update(userId, userUpdateDto);
 
         //then
         assertThat(result.getId()).isEqualTo(userId);
@@ -143,7 +142,7 @@ class UserServiceTest {
         userService.login(100L);
 
         //then
-        UserEntity result = userService.getById(100L);
+        User result = userService.getById(100L);
         // TODO 테스트 가능한 설계로 변경하기
         // assertThat(result.getLastLoginAt()).isEqualTo(로그인 한 시각);
         assertThat(result.getLastLoginAt()).isGreaterThan(0L);
@@ -157,7 +156,7 @@ class UserServiceTest {
         userService.verifyEmail(200L, "aaaaa-aaaaaaaaaa-aaaaa-aaaaa");
 
         //then
-        UserEntity result = userService.getById(200L);
+        User result = userService.getById(200L);
         assertThat(result.getStatus()).isEqualTo(UserStatus.ACTIVE);
     }
 

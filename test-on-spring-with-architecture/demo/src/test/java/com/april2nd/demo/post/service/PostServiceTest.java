@@ -1,10 +1,9 @@
 package com.april2nd.demo.post.service;
 
 import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
+import com.april2nd.demo.post.domain.Post;
 import com.april2nd.demo.post.domain.PostCreate;
 import com.april2nd.demo.post.domain.PostUpdate;
-import com.april2nd.demo.post.infrastructure.PostEntity;
-import com.april2nd.demo.post.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +35,12 @@ class PostServiceTest {
     @DisplayName("postId로 포스트를 불러올 수 있다")
     public void postId로_포스트를_불러올_수_있다() throws Exception {
         //given
-        Long postId = 100L;
-
         //when
-        PostEntity result = postService.getPostById(postId);
+        Post result = postService.getPostById(100L);
         //then
         assertThat(result.getId()).isNotNull();
+        assertThat(result.getContent()).isEqualTo("helloworld");
+        assertThat(result.getWriter().getEmail()).isEqualTo("rlawnsgh8395@naver.com");
     }
 
     @Test
@@ -64,10 +63,11 @@ class PostServiceTest {
                 .writerId(100L)
                 .build();
         //when
-        PostEntity result = postService.create(postCreateDto);
+        Post result = postService.create(postCreateDto);
 
         //then
-        assertThat(result.getWriter().getId()).isEqualTo(100L);
+        assertThat(result.getId()).isNotNull();
+        assertThat(result.getContent()).isEqualTo("createdByPostCreateDto");
 
         // TODO: 테스트 가능한 설계로 변경하기 ( PostServiceTest.create )
         assertThat(result.getCreatedAt()).isGreaterThan(0L);
@@ -82,9 +82,10 @@ class PostServiceTest {
                 .content("UpdatedPostByPostUpdateDto")
                 .build();
         //when
-        PostEntity result = postService.update(100L, postUpdateDto);
+        postService.update(100L, postUpdateDto);
 
         //then
+        Post result = postService.getPostById(100L);
         assertThat(result.getContent()).isEqualTo(postUpdateDto.getContent());
         // TODO: 테스트 가능한 설계로 변경하기 ( PostServiceTest.update )
         assertThat(result.getModifiedAt()).isGreaterThan(0L);
