@@ -9,11 +9,13 @@ import com.april2nd.demo.user.domain.UserCreate;
 import com.april2nd.demo.user.domain.UserUpdate;
 
 import com.april2nd.demo.user.service.port.UserRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
