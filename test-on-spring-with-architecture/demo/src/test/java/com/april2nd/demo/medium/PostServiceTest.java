@@ -1,9 +1,10 @@
-package com.april2nd.demo.post.service;
+package com.april2nd.demo.medium;
 
 import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
 import com.april2nd.demo.post.domain.Post;
 import com.april2nd.demo.post.domain.PostCreate;
 import com.april2nd.demo.post.domain.PostUpdate;
+import com.april2nd.demo.post.service.PostService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

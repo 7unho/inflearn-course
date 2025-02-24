@@ -1,4 +1,4 @@
-package com.april2nd.demo.user.service;
+package com.april2nd.demo.medium;
 
 import com.april2nd.demo.common.domain.exception.CertificationCodeNotMatchedException;
 import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
@@ -6,6 +6,7 @@ import com.april2nd.demo.user.domain.User;
 import com.april2nd.demo.user.domain.UserCreate;
 import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserUpdate;
+import com.april2nd.demo.user.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
