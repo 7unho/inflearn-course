@@ -1,8 +1,6 @@
 package com.april2nd.demo.medium;
 
 import com.april2nd.demo.post.domain.PostUpdate;
-import com.april2nd.demo.user.domain.User;
-import com.april2nd.demo.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

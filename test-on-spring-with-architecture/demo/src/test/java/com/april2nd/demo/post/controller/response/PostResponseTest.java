@@ -6,7 +6,6 @@ import com.april2nd.demo.user.domain.UserStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PostResponseTest {
     // TODO: Post로_응답(PostResponse)을_생성할_수_있다

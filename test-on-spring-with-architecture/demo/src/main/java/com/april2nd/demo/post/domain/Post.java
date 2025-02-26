@@ -1,10 +1,9 @@
 package com.april2nd.demo.post.domain;
 
+import com.april2nd.demo.common.service.port.ClockHolder;
 import com.april2nd.demo.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.time.Clock;
 
 @Getter
 public class Post {
@@ -23,20 +22,20 @@ public class Post {
         this.writer = writer;
     }
 
-    public static Post from(PostCreate postCreate, User writer) {
+    public static Post from(PostCreate postCreate, User writer, ClockHolder clockHolder) {
         return Post.builder()
                 .content(postCreate.getContent())
-                .createdAt(Clock.systemUTC().millis())
+                .createdAt(clockHolder.millis())
                 .writer(writer)
                 .build();
     }
 
-    public Post update(PostUpdate postUpdate) {
+    public Post update(PostUpdate postUpdate, ClockHolder clockHolder) {
         return Post.builder()
                 .id(id)
                 .content(postUpdate.getContent())
                 .createdAt(createdAt)
-                .modifiedAt(Clock.systemUTC().millis())
+                .modifiedAt(clockHolder.millis())
                 .writer(writer)
                 .build();
     }

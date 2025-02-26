@@ -1,7 +1,6 @@
 package com.april2nd.demo.user.service;
 
 import com.april2nd.demo.mock.FakeMailSender;
-import com.april2nd.demo.user.service.port.MailSender;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

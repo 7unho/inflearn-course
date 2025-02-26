@@ -6,9 +6,6 @@ import com.april2nd.demo.common.service.port.UuidHolder;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.Clock;
-import java.util.UUID;
-
 @Getter
 public class User {
     private final Long id;

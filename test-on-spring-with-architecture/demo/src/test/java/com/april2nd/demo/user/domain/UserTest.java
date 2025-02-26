@@ -1,7 +1,6 @@
 package com.april2nd.demo.user.domain;
 
 import com.april2nd.demo.common.domain.exception.CertificationCodeNotMatchedException;
-import com.april2nd.demo.common.infrastructure.SystemClockHolder;
 import com.april2nd.demo.mock.TestClockHolder;
 import com.april2nd.demo.mock.TestUuidHolder;
 import org.junit.jupiter.api.DisplayName;

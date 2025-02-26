@@ -4,7 +4,6 @@ import com.april2nd.demo.user.domain.User;
 import com.april2nd.demo.user.domain.UserStatus;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Builder

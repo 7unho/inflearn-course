@@ -5,7 +5,6 @@ import com.april2nd.demo.user.domain.UserStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserResponseTest {
     // TODO: User로_응답(UserResponse)을_생성할_수_있다
