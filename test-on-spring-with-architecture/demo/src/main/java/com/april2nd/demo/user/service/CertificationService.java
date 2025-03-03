@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CertificationService {
+public class CertificationService implements com.april2nd.demo.user.controller.port.CertificationService {
     private final MailSender mailSender;
 
     public void send(String email, long userId, String certificationCode) {

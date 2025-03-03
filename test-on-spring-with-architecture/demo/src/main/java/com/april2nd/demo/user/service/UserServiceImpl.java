@@ -3,6 +3,7 @@ package com.april2nd.demo.user.service;
 import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
 import com.april2nd.demo.common.service.port.ClockHolder;
 import com.april2nd.demo.common.service.port.UuidHolder;
+import com.april2nd.demo.user.controller.port.*;
 import com.april2nd.demo.user.domain.User;
 import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserCreate;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Builder
 @RequiredArgsConstructor
-public class UserService {
+public class UserServiceImpl implements UserReadService, UserCreateService, UserUpdateService, AuthenticationService {
     private final UserRepository userRepository;
     private final CertificationService certificationService;
     private final UuidHolder uuidHolder;
@@ -25,12 +26,12 @@ public class UserService {
 
     public User getByEmail(String email) {
         return userRepository.findByEmailAndStatus(email, UserStatus.ACTIVE)
-            .orElseThrow(() -> new ResourceNotFoundException("Users", email));
+                .orElseThrow(() -> new ResourceNotFoundException("Users", email));
     }
 
     public User getById(long id) { // get은 기본적으로 값이 없다면 에러를 던진다는 의미가 내포되어 있다.
         return userRepository.findByIdAndStatus(id, UserStatus.ACTIVE)
-            .orElseThrow(() -> new ResourceNotFoundException("Users", id));
+                .orElseThrow(() -> new ResourceNotFoundException("Users", id));
     }
 
     @Transactional

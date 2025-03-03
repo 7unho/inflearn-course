@@ -4,7 +4,7 @@ import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
 import com.april2nd.demo.post.domain.Post;
 import com.april2nd.demo.post.domain.PostCreate;
 import com.april2nd.demo.post.domain.PostUpdate;
-import com.april2nd.demo.post.service.PostService;
+import com.april2nd.demo.post.service.PostServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +28,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
                 executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD
         )
 })
-class PostServiceTest {
+class PostServiceImplTest {
     @Autowired
-    private PostService postService;
+    private PostServiceImpl postServiceImpl;
     @Test
     @DisplayName("postId로 포스트를 불러올 수 있다")
     public void postId로_포스트를_불러올_수_있다() throws Exception {
         //given
         //when
-        Post result = postService.getPostById(100L);
+        Post result = postServiceImpl.getPostById(100L);
         //then
         assertThat(result.getId()).isNotNull();
         assertThat(result.getContent()).isEqualTo("helloworld");
@@ -50,7 +50,7 @@ class PostServiceTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            postService.getPostById(111L);
+            postServiceImpl.getPostById(111L);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 
@@ -63,7 +63,7 @@ class PostServiceTest {
                 .writerId(100L)
                 .build();
         //when
-        Post result = postService.create(postCreateDto);
+        Post result = postServiceImpl.create(postCreateDto);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -82,10 +82,10 @@ class PostServiceTest {
                 .content("UpdatedPostByPostUpdateDto")
                 .build();
         //when
-        postService.update(100L, postUpdateDto);
+        postServiceImpl.update(100L, postUpdateDto);
 
         //then
-        Post result = postService.getPostById(100L);
+        Post result = postServiceImpl.getPostById(100L);
         assertThat(result.getContent()).isEqualTo(postUpdateDto.getContent());
         // TODO: 테스트 가능한 설계로 변경하기 ( PostServiceTest.update )
 //        assertThat(result.getModifiedAt()).isEqualTo(1678530673958L);

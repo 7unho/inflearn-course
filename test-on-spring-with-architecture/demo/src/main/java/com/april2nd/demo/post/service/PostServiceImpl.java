@@ -6,6 +6,7 @@ import com.april2nd.demo.post.domain.Post;
 import com.april2nd.demo.post.domain.PostCreate;
 import com.april2nd.demo.post.domain.PostUpdate;
 import com.april2nd.demo.post.service.port.PostRepository;
+import com.april2nd.demo.post.controller.port.PostService;
 import com.april2nd.demo.user.domain.User;
 
 import com.april2nd.demo.user.service.port.UserRepository;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Builder
 @RequiredArgsConstructor
-public class PostService {
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;

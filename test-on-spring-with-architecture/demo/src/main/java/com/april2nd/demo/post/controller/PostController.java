@@ -1,8 +1,8 @@
 package com.april2nd.demo.post.controller;
 
+import com.april2nd.demo.post.controller.port.PostService;
 import com.april2nd.demo.post.controller.response.PostResponse;
 import com.april2nd.demo.post.domain.PostUpdate;
-import com.april2nd.demo.post.service.PostService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
