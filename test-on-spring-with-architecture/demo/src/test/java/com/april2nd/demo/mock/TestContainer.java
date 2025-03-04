@@ -2,6 +2,8 @@ package com.april2nd.demo.mock;
 
 import com.april2nd.demo.common.service.port.ClockHolder;
 import com.april2nd.demo.common.service.port.UuidHolder;
+import com.april2nd.demo.post.controller.PostController;
+import com.april2nd.demo.post.controller.PostCreateController;
 import com.april2nd.demo.post.controller.port.PostService;
 import com.april2nd.demo.post.service.PostServiceImpl;
 import com.april2nd.demo.post.service.port.PostRepository;
@@ -26,6 +28,8 @@ public class TestContainer {
     public final CertificationService certificationService;
     public final UserController userController;
     public final UserCreateController userCreateController;
+    public final PostController postController;
+    public final PostCreateController postCreateController;
 
     @Builder
     public TestContainer(UuidHolder uuidHolder, ClockHolder clockHolder) {
@@ -58,6 +62,12 @@ public class TestContainer {
                 .build();
         this.userCreateController = UserCreateController.builder()
                 .userCreateService(this.userCreateService)
+                .build();
+        this.postController = PostController.builder()
+                .postService(this.postService)
+                .build();
+        this.postCreateController = PostCreateController.builder()
+                .postService(this.postService)
                 .build();
     }
 }
