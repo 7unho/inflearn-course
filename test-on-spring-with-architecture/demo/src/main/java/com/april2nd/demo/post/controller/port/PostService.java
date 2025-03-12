@@ -5,7 +5,7 @@ import com.april2nd.demo.post.domain.PostCreate;
 import com.april2nd.demo.post.domain.PostUpdate;
 
 public interface PostService {
-    Post getPostById(long id);
+    Post getById(long id);
 
     Post create(PostCreate postCreate);
 

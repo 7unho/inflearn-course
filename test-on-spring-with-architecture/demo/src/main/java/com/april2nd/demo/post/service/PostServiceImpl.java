@@ -24,7 +24,7 @@ public class PostServiceImpl implements PostService {
     private final UserRepository userRepository;
     private final ClockHolder clockHolder;
 
-    public Post getPostById(long id) {
+    public Post getById(long id) {
         return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posts", id));
     }
 
@@ -37,7 +37,7 @@ public class PostServiceImpl implements PostService {
 
     @Transactional
     public Post update(long id, PostUpdate postUpdate) {
-        Post post = getPostById(id);
+        Post post = getById(id);
         post = post.update(postUpdate, clockHolder);
         return postRepository.save(post);
     }

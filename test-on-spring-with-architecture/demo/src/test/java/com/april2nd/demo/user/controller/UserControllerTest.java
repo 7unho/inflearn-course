@@ -5,13 +5,11 @@ import com.april2nd.demo.common.domain.exception.ResourceNotFoundException;
 import com.april2nd.demo.mock.TestClockHolder;
 import com.april2nd.demo.mock.TestContainer;
 import com.april2nd.demo.mock.TestUuidHolder;
-import com.april2nd.demo.user.controller.port.UserService;
 import com.april2nd.demo.user.controller.response.MyProfileResponse;
 import com.april2nd.demo.user.controller.response.UserResponse;
 import com.april2nd.demo.user.domain.User;
 import com.april2nd.demo.user.domain.UserStatus;
 import com.april2nd.demo.user.domain.UserUpdate;
-import com.april2nd.demo.user.service.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatusCode;
@@ -39,7 +37,7 @@ class UserControllerTest {
                 .lastLoginAt(970402L)
                 .build());
         //when
-        ResponseEntity<UserResponse> result = testContainer.userController.getUserById(100L);
+        ResponseEntity<UserResponse> result = testContainer.userController.getById(100L);
 
         //then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
@@ -106,7 +104,7 @@ class UserControllerTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            testContainer.userController.getUserById(404L);
+            testContainer.userController.getById(404L);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 

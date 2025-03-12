@@ -72,7 +72,7 @@ class PostServiceImplTest {
     public void postId로_포스트를_불러올_수_있다() throws Exception {
         //given
         //when
-        Post result = postServiceImpl.getPostById(100L);
+        Post result = postServiceImpl.getById(100L);
         //then
         assertThat(result.getId()).isEqualTo(100L);
         assertThat(result.getContent()).isEqualTo("helloworld");
@@ -86,7 +86,7 @@ class PostServiceImplTest {
         //when
         //then
         assertThatThrownBy(() -> {
-            postServiceImpl.getPostById(111L);
+            postServiceImpl.getById(111L);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 
@@ -122,7 +122,7 @@ class PostServiceImplTest {
         postServiceImpl.update(100L, postUpdateDto);
 
         //then
-        Post result = postServiceImpl.getPostById(100L);
+        Post result = postServiceImpl.getById(100L);
         assertThat(result.getContent()).isEqualTo(postUpdateDto.getContent());
         // TODO: 테스트 가능한 설계로 변경하기 ( PostServiceTest.update )
 //        assertThat(result.getModifiedAt()).isGreaterThan(0L);

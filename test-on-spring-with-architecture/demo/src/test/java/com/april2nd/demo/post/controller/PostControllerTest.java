@@ -67,7 +67,7 @@ class PostControllerTest {
     public void 포스트_ID를_통해_특정_게시물_정보를_불러올_수_있다() throws Exception {
         // given
         // when
-        ResponseEntity<PostResponse> result = testContainer.postController.getPostById(101L);
+        ResponseEntity<PostResponse> result = testContainer.postController.getById(101L);
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(result.getBody().getId()).isEqualTo(101L);
@@ -111,7 +111,7 @@ class PostControllerTest {
                 .build();
 
         // when
-        ResponseEntity<PostResponse> result = testContainer.postController.updatePost(postId, postUpdate);
+        ResponseEntity<PostResponse> result = testContainer.postController.update(postId, postUpdate);
 
         // then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -139,7 +139,7 @@ class PostControllerTest {
         // when
         // then
         assertThatThrownBy(() -> {
-            testContainer.postController.getPostById(404L);
+            testContainer.postController.getById(404L);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 }
