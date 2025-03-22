@@ -24,7 +24,12 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	// add more
+
+	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// kafka
+	implementation 'org.springframework.kafka:spring-kafka'
 }
 
 tasks.named('test') {
