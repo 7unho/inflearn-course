@@ -1,5 +1,7 @@
+package main.src;
+
 public class Calculator {
-    long calculate(long num1, char operator, long num2) throws Exception {
+    public long calculate(long num1, char operator, long num2) throws Exception {
         long result = 0;
         switch (operator) {
             case '+':
