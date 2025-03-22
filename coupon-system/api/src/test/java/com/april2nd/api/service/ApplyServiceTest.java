@@ -1,9 +1,11 @@
 package com.april2nd.api.service;
 
 import com.april2nd.api.repository.CouponRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -18,7 +20,6 @@ class ApplyServiceTest {
 
     @Autowired
     private CouponRepository couponRepository;
-
     @Test
     public void 한번만응모() throws Exception {
         // given
