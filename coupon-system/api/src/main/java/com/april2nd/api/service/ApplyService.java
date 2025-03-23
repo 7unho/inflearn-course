@@ -1,6 +1,5 @@
 package com.april2nd.api.service;
 
-import com.april2nd.api.domain.Coupon;
 import com.april2nd.api.producer.CouponCreateProducer;
 import com.april2nd.api.repository.AppliedUserRepository;
 import com.april2nd.api.repository.CouponCountRepository;
@@ -9,17 +8,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ApplyService {
-    private final CouponRepository couponRepository;
     private final CouponCountRepository couponCountRepository;
     private final CouponCreateProducer couponCreateProducer;
     private final AppliedUserRepository appliedUserRepository;
 
     public ApplyService(
-            CouponRepository couponRepository,
             CouponCountRepository couponCountRepository,
             CouponCreateProducer couponCreateProducer,
             AppliedUserRepository appliedUserRepository) {
-        this.couponRepository = couponRepository;
         this.couponCountRepository = couponCountRepository;
         this.couponCreateProducer = couponCreateProducer;
         this.appliedUserRepository = appliedUserRepository;
