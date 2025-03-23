@@ -60,4 +60,35 @@ class ApplyServiceTest {
         // then
         assertThat(count).isEqualTo(100L);
     }
+
+    @Test
+    public void 한명당_한개의쿠폰만_발급() throws Exception {
+        // given
+        int threadCount = 1000;
+
+        // multi-thread 환경을 위한 변수
+        ExecutorService executorService = Executors.newFixedThreadPool(32);
+        CountDownLatch latch = new CountDownLatch(threadCount);
+
+        // when
+        for (int i = 0; i < threadCount; i++) {
+            long userId = i;
+            executorService.submit(() -> {
+                try {
+                    applyService.apply(1L);
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+
+        latch.await();
+
+        Thread.sleep(10000);
+
+        long count = couponRepository.count();
+
+        // then
+        assertThat(count).isEqualTo(1L);
+    }
 }
