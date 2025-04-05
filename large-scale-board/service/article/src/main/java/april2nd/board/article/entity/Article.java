@@ -1,5 +1,6 @@
 package april2nd.board.article.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -22,29 +23,19 @@ public class Article {
     private String title;
     private String content;
     private Long boardId;
-    private Long writerid;
+    private Long writerId;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public static Article create(Long articleId, String title, String content, Long boardId, Long writerid, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public static Article create(Long articleId, String title, String content, Long boardId, Long writerId) {
         Article article = new Article();
         article.articleId = articleId;
         article.title = title;
         article.content = content;
         article.boardId = boardId;
-        article.writerid = writerid;
-        article.createdAt = createdAt;
-        article.modifiedAt = modifiedAt;
-        return article;
-    }
-
-    public static Article create(Long articleId, String title, String content, Long boardId, Long writerid) {
-        Article article = new Article();
-        article.articleId = articleId;
-        article.title = title;
-        article.content = content;
-        article.boardId = boardId;
-        article.writerid = writerid;
+        article.writerId = writerId;
+        article.createdAt = LocalDateTime.now();
+        article.modifiedAt = article.createdAt;
         return article;
     }
 
