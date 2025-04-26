@@ -6,6 +6,8 @@ import lombok.Getter;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestClient;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class ArticleApiTest {
     RestClient restClient = RestClient.create("http://localhost:9000");
 
@@ -27,17 +29,56 @@ public class ArticleApiTest {
                 .retrieve()
                 .body(ArticleResponse.class);
     }
+    @Test
+    void readTest() {
+        Long articleId = 166799136342433792L;
+        ArticleResponse res = read(articleId);
+        System.out.println("res = " + res);
+    }
+
+    private ArticleResponse read(Long articleId) {
+        return restClient.get()
+                .uri("/v1/articles/" + articleId)
+                .retrieve()
+                .body(ArticleResponse.class);
+    }
+
+    @Test
+    void updateTest() {
+        Long articleId = 166799136342433792L;
+        update(articleId);
+        ArticleResponse res = read(articleId);
+
+        assertThat(res.getTitle()).isEqualTo("new title");
+        assertThat(res.getContent()).isEqualTo("new content");
+    }
+
+    void update(Long articleId) {
+        restClient.put()
+                .uri("/v1/articles/{articleId}", articleId)
+                .body(new ArticleUpdateRequest("new title", "new content"))
+                .retrieve();
+    }
+
+    @Test
+    void deleteTest() {
+        Long articleId = 166799136342433792L;
+        restClient.delete()
+                .uri("/v1/articles/{articleId}", articleId)
+                .retrieve();
+    }
 
     @Getter
     @AllArgsConstructor
     static class ArticleCreateRequest {
         private String title;
         private String content;
-        private Long articleId;
+        private Long boardId;
         private Long writerId;
     }
 
     @Getter
+    @AllArgsConstructor
     static class ArticleUpdateRequest {
         private String title;
         private String content;
