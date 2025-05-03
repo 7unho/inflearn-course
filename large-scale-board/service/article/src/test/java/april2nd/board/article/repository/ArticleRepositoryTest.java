@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
@@ -31,5 +31,17 @@ class ArticleRepositoryTest {
 
         assertNotNull(count);
         assertThat(count).isEqualTo(10000L);
+    }
+
+    @Test
+    void findInfiniteScrollTest() {
+        List<Article> articles = articleRepository.findAllInfiniteScroll(1L, 30L);
+
+        Long lastArticleId = articles.getLast().getArticleId();
+
+        var result = articleRepository.findAllInfiniteScroll(1L, 30L, lastArticleId);
+
+        assertNotNull(result);
+        assertThat(result).hasSize(30);
     }
 }
