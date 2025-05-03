@@ -4,11 +4,16 @@ import april2nd.board.article.service.response.ArticlePageResponse;
 import april2nd.board.article.service.response.ArticleResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class ArticleApiTest {
     RestClient restClient = RestClient.create("http://localhost:9000");
 
@@ -73,6 +78,24 @@ public class ArticleApiTest {
     void readAllTest() {
         restClient.get().uri("/v1/articles?boardId=1&pageSize=30&page=50000")
                 .retrieve().body(ArticlePageResponse.class);
+    }
+
+    @Test
+    void readAllInfiniteScrollTest() {
+        List<ArticleResponse> firstPage = restClient.get().uri("/v1/articles/infinite-scroll?boardId=1&pageSize=30")
+                .retrieve().body(new ParameterizedTypeReference<List<ArticleResponse>>() {
+                });
+
+        Long lastArticleId = firstPage.getLast().getArticleId();
+        log.info("Last Article Id >>>>>>>>  = " + lastArticleId);
+
+        List<ArticleResponse> secondPage = restClient.get().uri("/v1/articles/infinite-scroll?boardId=1&pageSize=30&lastArticleId={lastArticleId}", lastArticleId)
+                .retrieve().body(new ParameterizedTypeReference<List<ArticleResponse>>() {
+                });
+
+        secondPage.forEach(article -> {
+            log.info(article.toString());
+        });
     }
 
     @Getter
