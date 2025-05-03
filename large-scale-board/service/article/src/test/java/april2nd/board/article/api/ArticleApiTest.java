@@ -1,5 +1,6 @@
 package april2nd.board.article.api;
 
+import april2nd.board.article.service.response.ArticlePageResponse;
 import april2nd.board.article.service.response.ArticleResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -66,6 +67,12 @@ public class ArticleApiTest {
         restClient.delete()
                 .uri("/v1/articles/{articleId}", articleId)
                 .retrieve();
+    }
+
+    @Test
+    void readAllTest() {
+        restClient.get().uri("/v1/articles?boardId=1&pageSize=30&page=50000")
+                .retrieve().body(ArticlePageResponse.class);
     }
 
     @Getter
