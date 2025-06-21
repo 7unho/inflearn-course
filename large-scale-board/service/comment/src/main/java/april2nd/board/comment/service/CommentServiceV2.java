@@ -31,7 +31,7 @@ public class CommentServiceV2 {
                         request.getWriterId(),
                         parentCommentPath.createChildCommentPath(
                                 commentRepository.findDescendantsTopPath(
-                                        request.getArticleId(), parentCommentPath.getParentPath()
+                                        request.getArticleId(), parentCommentPath.getPath()
                                 ).orElse(null)
                         ))
         );

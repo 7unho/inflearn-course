@@ -38,9 +38,9 @@ public class CommentResponse {
         response.content = comment.getContent();
         response.articleId = comment.getArticleId();
         response.writerId = comment.getWriterId();
-        response.path = comment.getCommentPath().toString();
+        response.path = comment.getCommentPath().getPath();
         response.deleted = comment.getDeleted();
-        response.createdAt = comment.getCreatedAt();
+        response.createdAt = comment.getCreateAt();
 
         return response;
     }

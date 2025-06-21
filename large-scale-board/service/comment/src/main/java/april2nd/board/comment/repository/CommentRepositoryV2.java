@@ -16,7 +16,7 @@ public interface CommentRepositoryV2 extends JpaRepository<CommentV2, Long> {
                     "FROM comment_v2 " +
                     "WHERE article_id = :articleId " +
                     "AND path > :pathPrefix " +
-                    "AND path LIKE :pathPrefix " +
+                    "AND path LIKE :pathPrefix% " +
                     "ORDER BY path desc LIMIT 1 ",
             nativeQuery = true
     )

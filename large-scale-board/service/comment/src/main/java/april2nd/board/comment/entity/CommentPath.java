@@ -24,11 +24,10 @@ public class CommentPath {
 
     public static CommentPath create(String path) {
         if (isDepthOverflowed(path)) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("depth overflowed");
         }
         CommentPath commentPath = new CommentPath();
         commentPath.path = path;
-
         return commentPath;
     }
 
@@ -56,9 +55,12 @@ public class CommentPath {
         if (descendantsTopPath == null) {
             return CommentPath.create(path + MIN_CHUNK);
         }
-
         String childrenTopPath = findChildrenTopPath(descendantsTopPath);
         return CommentPath.create(increase(childrenTopPath));
+    }
+
+    private String findChildrenTopPath(String descendantsTopPath) {
+        return descendantsTopPath.substring(0, (getDepth() + 1) * DEPTH_CHUNK_SIZE);
     }
 
     private String increase(String path) {
@@ -70,14 +72,14 @@ public class CommentPath {
         int charsetLength = CHARSET.length();
 
         int value = 0;
-        for (char ch: lastChunk.toCharArray()) {
+        for (char ch : lastChunk.toCharArray()) {
             value = value * charsetLength + CHARSET.indexOf(ch);
         }
 
         value = value + 1;
 
         String result = "";
-        for (int i = 0; i < DEPTH_CHUNK_SIZE; i++) {
+        for (int i=0; i < DEPTH_CHUNK_SIZE; i++) {
             result = CHARSET.charAt(value % charsetLength) + result;
             value /= charsetLength;
         }
@@ -89,7 +91,4 @@ public class CommentPath {
         return MAX_CHUNK.equals(lastChunk);
     }
 
-    private String findChildrenTopPath(String descendantsTopPath) {
-        return descendantsTopPath.substring(0, (getDepth() + 1) * DEPTH_CHUNK_SIZE);
-    }
 }

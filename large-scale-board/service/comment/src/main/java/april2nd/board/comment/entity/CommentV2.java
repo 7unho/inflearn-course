@@ -17,7 +17,7 @@ public class CommentV2 {
     @Embedded
     private CommentPath commentPath;
     private Boolean deleted;
-    private LocalDateTime createdAt;
+    private LocalDateTime createAt;
 
     public static CommentV2 create(
             Long commentId,
@@ -31,6 +31,8 @@ public class CommentV2 {
         comment.articleId = articleId;
         comment.writerId = writerId;
         comment.commentPath = commentPath;
+        comment.deleted = false;
+        comment.createAt = LocalDateTime.now();
 
         return comment;
     }
