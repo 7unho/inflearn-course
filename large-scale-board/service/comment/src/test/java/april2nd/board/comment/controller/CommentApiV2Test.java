@@ -1,10 +1,14 @@
 package april2nd.board.comment.controller;
 
+import april2nd.board.comment.service.response.CommentPageResponse;
 import april2nd.board.comment.service.response.CommentResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 class CommentApiV2Test {
     RestClient restClient = RestClient.create("http://localhost:9001");
@@ -26,6 +30,34 @@ class CommentApiV2Test {
                 .body(request)
                 .retrieve()
                 .body(CommentResponse.class);
+    }
+
+    @Test
+    void read() {
+        restClient.get()
+                .uri("/v2/comments/{commentId}", 194666954694598656L)
+                .retrieve()
+                .body(CommentPageResponse.class);
+    }
+
+    @Test
+    void readAll() {
+        CommentPageResponse response = restClient.get()
+                .uri("/v2/comments?articleId=1&pageSize=10&page=1")
+                .retrieve()
+                .body(CommentPageResponse.class);
+
+        response.getComments().forEach(System.out::println);
+    }
+
+    @Test
+    void readAll_infiniteScroll() {
+        List<CommentResponse> response = restClient.get()
+                .uri("/v2/comments/infinite-scroll?articleId=1&pageSize=1&lastPath=00000")
+                .retrieve()
+                .body(new ParameterizedTypeReference<>() {});
+
+        response.forEach(System.out::println);
     }
 
     @Getter

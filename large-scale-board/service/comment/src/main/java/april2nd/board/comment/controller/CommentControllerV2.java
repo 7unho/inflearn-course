@@ -2,9 +2,12 @@ package april2nd.board.comment.controller;
 
 import april2nd.board.comment.service.CommentServiceV2;
 import april2nd.board.comment.service.request.CommentCreateRequestV2;
+import april2nd.board.comment.service.response.CommentPageResponse;
 import april2nd.board.comment.service.response.CommentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,6 +17,22 @@ public class CommentControllerV2 {
     @GetMapping("/v2/comments/{commentId}")
     public CommentResponse read(@PathVariable("commentId") Long commentId) {
         return commentService.read(commentId);
+    }
+
+    @GetMapping("/v2/comments")
+    public CommentPageResponse readAll(
+            @RequestParam("articleId") Long articleId,
+            @RequestParam("page") Long page,
+            @RequestParam("pageSize") Long pageSize) {
+        return commentService.readAll(articleId, page, pageSize);
+    }
+
+    @GetMapping("/v2/comments/infinite-scroll")
+    public List<CommentResponse> readAll(
+            @RequestParam("articleId") Long articleId,
+            @RequestParam(value = "lastPath", required = false) String lastPath,
+            @RequestParam("pageSize") Long pageSize) {
+        return commentService.readAllInfiniteScroll(articleId, lastPath, pageSize);
     }
 
     @PostMapping("/v2/comments")
