@@ -17,6 +17,11 @@ public class ArticleLikeController {
         return articleLikeService.read(articleId, userId);
     }
 
+    @GetMapping("/v1/article-likes/articles/{articleId}/count")
+    public Long count(@PathVariable("articleId") Long articleId) {
+        return articleLikeService.count(articleId);
+    }
+
     @PostMapping("/v1/article-likes/articles/{articleId}/users/{userId}/pessimistic-lock-1")
     public void likePessimisticLock1(
             @PathVariable("articleId") Long articleId,
