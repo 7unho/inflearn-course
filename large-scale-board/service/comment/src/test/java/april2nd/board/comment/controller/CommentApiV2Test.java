@@ -10,6 +10,8 @@ import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class CommentApiV2Test {
     RestClient restClient = RestClient.create("http://localhost:9001");
 
@@ -58,6 +60,31 @@ class CommentApiV2Test {
                 .body(new ParameterizedTypeReference<>() {});
 
         response.forEach(System.out::println);
+    }
+
+    @Test
+    void countTest() {
+        // give
+        CommentResponse response = create(new CommentCreateRequestV2(2L, "my comment1", null, 1L));
+
+        // when
+        Long beforeDeleted = restClient.get()
+                .uri("/v2/comments/articles/{articleId}/count", response.getArticleId())
+                .retrieve()
+                .body(Long.class);
+
+        restClient.delete()
+                .uri("/v2/comments/{commentId}", response.getCommentId())
+                .retrieve();
+
+        Long afterDeleted = restClient.get()
+                .uri("/v2/comments/articles/{articleId}/count", response.getArticleId())
+                .retrieve()
+                .body(Long.class);
+
+        // then
+        assertThat(beforeDeleted).isEqualTo(1L);
+        assertThat(afterDeleted).isEqualTo(0L);
     }
 
     @Getter
