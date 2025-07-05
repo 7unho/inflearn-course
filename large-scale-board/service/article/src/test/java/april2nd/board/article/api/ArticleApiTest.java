@@ -98,6 +98,27 @@ public class ArticleApiTest {
         });
     }
 
+    @Test
+    void countTest() {
+        ArticleResponse response = create(new ArticleCreateRequest("hi", "my content", 1L, 2L));
+
+        Long beforeDeleted = restClient.get()
+                .uri("/v1/articles/{boardId}/count", response.getBoardId())
+                .retrieve()
+                .body(Long.class);
+
+        restClient.delete()
+                .uri("/v1/articles/{articleId}", response.getArticleId())
+                .retrieve();
+
+        Long afterDeleted = restClient.get()
+                .uri("/v1/articles/{boardId}/count", response.getBoardId())
+                .retrieve()
+                .body(Long.class);
+
+        assertThat(beforeDeleted).isEqualTo(afterDeleted + 1);
+    }
+
     @Getter
     @AllArgsConstructor
     static class ArticleCreateRequest {
