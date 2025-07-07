@@ -1,6 +1,6 @@
 package april2nd.board.like.service;
 
-import april2nd.board.common.snowflake.Snowflake;
+import april2nd.board.common.event.Snowflake;
 import april2nd.board.like.entity.ArticleLike;
 import april2nd.board.like.entity.ArticleLikeCount;
 import april2nd.board.like.repository.ArticleLikeCountRepository;
@@ -9,8 +9,6 @@ import april2nd.board.like.service.response.ArticleLikeResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -1,7 +1,7 @@
 package april2nd.board.comment.data;
 
 import april2nd.board.comment.entity.Comment;
-import april2nd.board.common.snowflake.Snowflake;
+import april2nd.board.common.event.Snowflake;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;

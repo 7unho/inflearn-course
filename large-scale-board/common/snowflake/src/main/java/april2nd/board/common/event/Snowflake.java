@@ -1,4 +1,4 @@
-package april2nd.board.common.snowflake;
+package april2nd.board.common.event;
 
 import java.util.random.RandomGenerator;
 

@@ -8,7 +8,7 @@ import april2nd.board.comment.repository.CommentRepositoryV2;
 import april2nd.board.comment.service.request.CommentCreateRequestV2;
 import april2nd.board.comment.service.response.CommentPageResponse;
 import april2nd.board.comment.service.response.CommentResponse;
-import april2nd.board.common.snowflake.Snowflake;
+import april2nd.board.common.event.Snowflake;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

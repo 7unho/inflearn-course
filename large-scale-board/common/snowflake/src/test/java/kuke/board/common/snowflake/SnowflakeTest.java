@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import april2nd.board.common.snowflake.Snowflake;
+import april2nd.board.common.event.Snowflake;
 import org.junit.jupiter.api.Test;
 
 class SnowflakeTest {
