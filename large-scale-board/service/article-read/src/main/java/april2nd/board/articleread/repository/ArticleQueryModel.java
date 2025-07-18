@@ -7,13 +7,17 @@ import april2nd.board.common.event.payload.article.ArticleUnlikedEventPayload;
 import april2nd.board.common.event.payload.article.ArticleUpdatedEventPayload;
 import april2nd.board.common.event.payload.comment.CommentCreatedEventPayload;
 import april2nd.board.common.event.payload.comment.CommentDeletedEventPayload;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArticleQueryModel {
     private Long articleId;
     private String title;
