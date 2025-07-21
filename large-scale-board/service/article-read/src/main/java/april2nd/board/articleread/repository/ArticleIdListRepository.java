@@ -28,7 +28,7 @@ public class ArticleIdListRepository {
              * score가 동일하다면, Value 값으로 정렬이 이루어짐
              */
             conn.zAdd(key, 0, toPaddedString(articleId));
-            conn.zRemRange(key, 0, limit - 1);
+            conn.zRemRange(key, 0, - limit - 1);
             return null;
         });
     }
@@ -54,10 +54,10 @@ public class ArticleIdListRepository {
     }
 
     private String toPaddedString(Long articleId) {
-        return String.format("%019d", articleId);
+        return "%019d".formatted(articleId);
     }
 
     private String generateKey(Long boardId) {
-        return String.format(KEY_FORMAT, boardId);
+        return KEY_FORMAT.formatted(boardId);
     }
 }

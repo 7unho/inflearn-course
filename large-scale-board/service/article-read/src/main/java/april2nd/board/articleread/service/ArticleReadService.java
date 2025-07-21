@@ -82,8 +82,7 @@ public class ArticleReadService {
         return articleIds.stream()
                 .map(articleId -> articleQueryModelMap.containsKey(articleId) ?
                         articleQueryModelMap.get(articleId) :
-                        fetch(articleId).orElse(null)
-                )
+                        fetch(articleId).orElse(null))
                 .filter(Objects::nonNull)
                 .map(articleQueryModel ->
                         ArticleReadResponse.from(
