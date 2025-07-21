@@ -43,7 +43,7 @@ public class ArticleClient {
     public ArticlePageResponse readAll(Long boardId, Long page, Long pageSize) {
         try {
             return restClient.get()
-                    .uri("/v1/articles?boardId=%s&page=%s&pageSize=%s", boardId, page, pageSize)
+                    .uri("/v1/articles?boardId={boardId}&page={page}&pageSize={pageSize}", boardId, page, pageSize)
                     .retrieve()
                     .body(ArticlePageResponse.class);
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class ArticleClient {
                                     "/v1/articles/infinite-scroll?boardId=%s&pageSize=%s".formatted(boardId, pageSize)
                     )
                     .retrieve()
-                    .body(new ParameterizedTypeReference<List<ArticleResponse>>() {});
+                    .body(new ParameterizedTypeReference<>() {});
         } catch (Exception e) {
             log.error("[ArticleClient.readAllInfiniteScroll] board ID: {}, lastArticleId : {}, pageSize : {}", boardId, lastArticleId, pageSize, e);
             return List.of();
